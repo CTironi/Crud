@@ -103,5 +103,29 @@ d.addEventListener("submit", async (e) => {
       $form.id.value = e.target.dataset.id;
     }
     if (e.target.matches(".delete")) {
+      let isDelete = confirm(
+        `¿Estás seguro de eliminar el id ${e.target.dataset.id}?`
+      );
+  
+      if (isDelete) {
+        try {
+          let options = {
+              method: "DELETE",
+              headers: {
+                "Content-type": "application/json; charset=utf-8",
+              },
+            },
+            res = await axios(
+              `http://localhost:5555/santos/${e.target.dataset.id}`,
+              options
+            ),
+            json = await res.data;
+  
+          location.reload();
+        } catch (err) {
+          let message = err.statusText || "Ocurrió un error";
+          alert(`Error ${err.status}: ${message}`);
+        }
+      }
   }
 });
