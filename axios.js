@@ -129,3 +129,6 @@ d.addEventListener("submit", async (e) => {
       }
   }
 });
+limpiarInput = () => {
+  $form.reset();
+};
